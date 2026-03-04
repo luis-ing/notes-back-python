@@ -1,0 +1,32 @@
+[project]
+name = "notes-back-python"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Luis Sánchez",email = "ing.luis.snchz@gmail.com"}
+]
+requires-python = ">=3.11,<3.13"
+
+dependencies = [
+    "fastapi==0.128.8",
+    "uvicorn[standard]==0.40.0",
+    "sqlalchemy==2.0.47",
+    "pymysql==1.1.2",
+    "python-jose==3.3.0",
+    "passlib[bcrypt]==1.7.4",
+    "bcrypt==4.0.1",
+    "python-dotenv==1.0.1",
+    "pydantic[email]>=2.0.0"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.2"
+httpx = "^0.28.1"
+
+[tool.poetry]
+package-mode = false

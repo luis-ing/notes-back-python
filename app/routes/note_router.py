@@ -12,14 +12,14 @@ router = APIRouter(
 )
 
 @router.get("/")
-def list_notes( user_id: int, db: Session = Depends(get_db)):
-    
+def list_notes( db: Session = Depends(get_db), token_data: dict = Depends(validate_token)):
+    user_id = token_data["user_id"]
     return notes_service.get_notes_by_user(db, user_id)
 
 @router.get("/{note_id}")
-def get_note_by_id(note_id: int, db: Session = Depends(get_db)):
-    
-    return notes_service.get_note_by_id(db, note_id)
+def get_note_by_id(note_id: int, db: Session = Depends(get_db), token_data: dict = Depends(validate_token)):
+    user_id = token_data["user_id"]
+    return notes_service.get_note_by_id(db, note_id, user_id)
 
 @router.post("/create")
 def create_note(note_data: CreateNote, db: Session = Depends(get_db)):

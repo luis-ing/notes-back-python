@@ -1,16 +1,21 @@
 {
-    // Use IntelliSense para saber los atributos posibles.
-    // Mantenga el puntero para ver las descripciones de los existentes atributos.
-    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    {"name":"Depurador de Python: Archivo actual","type":"debugpy","request":"launch","program":"${file}","console":"integratedTerminal"},
         {
-            "name": "Depurador de Python: Archivo actual",
+            "name": "FastAPI Debug",
             "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
+            "python": "C:\\Users\\lklk9\\AppData\\Local\\pypoetry\\Cache\\virtualenvs\\notes-back-python-fJ-hi444-py3.12\\Scripts\\python.exe",
+            "module": "uvicorn",
+            "args": [
+                "main:app",
+                "--host",
+                "127.0.0.1",
+                "--port",
+                "8000",
+                "--reload"
+            ],
+            "jinja": true
         }
     ]
 }
