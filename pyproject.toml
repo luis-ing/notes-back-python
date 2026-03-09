@@ -30,3 +30,7 @@ httpx = "^0.28.1"
 
 [tool.poetry]
 package-mode = false
+
+# Necesario para que pytest encuentre los tests en __tests__/
+[tool.pytest.ini_options]
+testpaths = ["__tests__"]

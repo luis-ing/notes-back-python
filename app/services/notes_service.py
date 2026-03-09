@@ -21,6 +21,8 @@ def create_note(db: Session, note_data: CreateNote):
         db.commit()
         db.refresh(new_note)
         return {"message": "Nota creada exitosamente", "note": new_note}
+    except HTTPException:
+        raise
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Error al crear la nota: {str(e)}")
@@ -28,7 +30,7 @@ def create_note(db: Session, note_data: CreateNote):
 # Actualizar información
 def update_note(db: Session, note_id: int, note_data: NotesBase):
     try:
-        note = db.query(Notes).filter(Notes.id == note_id and Notes.isActive == True).first()
+        note = db.query(Notes).filter(Notes.id == note_id, Notes.isActive == True).first()
         
         if not note:
             raise HTTPException(status_code=404, detail="Nota no encontrada o inactiva")
@@ -49,7 +51,7 @@ def update_note(db: Session, note_id: int, note_data: NotesBase):
 # Eliminar nota
 def delete_note(db: Session, note_id: int):
     try:
-        note = db.query(Notes).filter(Notes.id == note_id and Notes.isActive == True).first()
+        note = db.query(Notes).filter(Notes.id == note_id, Notes.isActive == True).first()
         if not note:
             raise HTTPException(status_code=404, detail="Nota no encontrada o inactiva")
         
@@ -62,7 +64,7 @@ def delete_note(db: Session, note_id: int):
     
 # Obtener nota por id
 def get_note_by_id(db: Session, note_id: int, user_id: int):
-    note = db.query(Notes).filter(Notes.id == note_id and Notes.isActive == True and Notes.userCreated == user_id).first()
+    note = db.query(Notes).filter(Notes.id == note_id, Notes.isActive == True, Notes.userCreated == user_id).first()
     
     if not note:
         raise HTTPException(status_code=404, detail="Nota no encontrada o inactiva")
@@ -71,6 +73,6 @@ def get_note_by_id(db: Session, note_id: int, user_id: int):
 
 # Obtener listado de notas por usuario
 def get_notes_by_user(db: Session, user_id: int):
-    notes = db.query(Notes).filter(Notes.userCreated == user_id and Notes.isActive == True).all()
+    notes = db.query(Notes).filter(Notes.userCreated == user_id, Notes.isActive == True).all()
     
     return notes
