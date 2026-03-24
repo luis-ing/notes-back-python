@@ -3,7 +3,11 @@ from app.routes import user_routes, note_router, login_routes
 from app.core.security import validate_token
 
 # Creamos la instancia de la aplicación
-app = FastAPI()
+app = FastAPI(
+    title="Notas API",
+    description="Api para la gestión de notas personales",
+    version="1.0.0",
+)
 
 # las rutas de login NO requieren token: ya están libres de dependencias.
 # los routers de usuarios y notas ya traen la dependencia `validate_token`
