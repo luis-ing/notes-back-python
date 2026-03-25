@@ -29,3 +29,7 @@ def create_note(note_data: CreateNote, db: Session = Depends(get_db)):
 @router.put("/update/{note_id}")
 def update_note(note_id: int, note_data: CreateNote, db: Session = Depends(get_db)):
     return notes_service.update_note(db, note_id, note_data)
+
+@router.delete("/delete/{note_id}")
+def delete_note(note_id: int, db: Session = Depends(get_db)):
+    return notes_service.delete_note(db, note_id)
